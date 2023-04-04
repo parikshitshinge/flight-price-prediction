@@ -1,4 +1,4 @@
-2023-04-05 - Flight Price Prediction
+Flight Price Prediction
 ==============================
 
 A system which predicts flight ticket price
