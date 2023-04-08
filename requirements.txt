@@ -13,5 +13,6 @@ matplotlib
 seaborn
 scikit-learn
 dill
+flask
 # local package
 -e .
