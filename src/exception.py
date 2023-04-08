@@ -1,6 +1,6 @@
 import sys 
 import logging
-import logger 
+import src.logger 
 
 # We'll call this function whenever there is exception in code
 def error_message_detail(error, error_detail:sys):
