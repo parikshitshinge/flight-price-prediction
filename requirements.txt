@@ -11,6 +11,7 @@ pandas
 numpy
 matplotlib
 seaborn
+scikit-learn
 
 # local package
 -e .
