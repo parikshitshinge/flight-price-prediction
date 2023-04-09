@@ -22,15 +22,12 @@ class TrainModel:
     def __init__(self):
         self.train_model_config = TrainModelConfig()
         
-    def initiate_train_model(self, train_array, test_array):
+    def initiate_train_model(self, vectorized_data):
         try:
             logging.info("Split train and test input data")
-            
-            X_train, y_train, X_test, y_test = (
-                train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1])
+            X = vectorized_data.drop(['price'], axis=1)
+            y = vectorized_data['price']
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=15)
             
             models = {
                 "Linear Regression": LinearRegression(),

@@ -14,5 +14,7 @@ seaborn
 scikit-learn
 dill
 flask
+dataclasses
+
 # local package
 -e .
