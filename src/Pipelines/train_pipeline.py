@@ -25,8 +25,8 @@ class TrainModel:
     def initiate_train_model(self, vectorized_data):
         try:
             logging.info("Split train and test input data")
-            X = vectorized_data.drop(['price'], axis=1)
-            y = vectorized_data['price']
+            X = vectorized_data[:,:-1]
+            y = vectorized_data[:,-1:]
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=15)
             
             models = {

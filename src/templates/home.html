@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        <TITLE>Flight Price Prediction</TITLE>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            function generateRandom() {
+                document.getElementById("from").selectedIndex = Math.floor(Math.random() * 6);
+                document.getElementById("to").selectedIndex = Math.floor(Math.random() * 6);
+                document.getElementById("type").selectedIndex = Math.floor(Math.random() * 2);
+                document.getElementById("airline").selectedIndex = Math.floor(Math.random() * 8);
+                document.getElementById("departure_phase").selectedIndex = Math.floor(Math.random() * 5);
+            }
+
+            // Disabling previous dates
+            $(function(){
+                var dtToday = new Date();
+             
+                var month = dtToday.getMonth() + 1;
+                var day = dtToday.getDate() + 1;
+                var day_def = dtToday.getDate() + 7;
+                var year = dtToday.getFullYear();
+                if(month < 10)
+                    month = '0' + month.toString();
+                if(day < 10)
+                    day = '0' + day.toString();
+                
+                var maxDate = year + '-' + month + '-' + day;
+                var defaultDate = year + '-' + month + '-' + day_def;
+                $('#date').attr('min', maxDate);
+                $('#date').attr('value', defaultDate);
+            }); 
+        </script>
+        <style>
+            label {
+                width:220px;
+                clear:left;
+                text-align:right;
+                padding-right:10px;
+            }
+
+            input, label, button, select {
+                float:left;
+                margin-top: 5px;
+            }
+
+            #submit, #result {
+                float:left; display:inline; clear:both;
+            }
+
+            #result {
+            color: blue;
+            font-size:20px;
+            }
+
+        </style>
+    </HEAD>
+    <BODY>
+        <h2>Flight Prediction Engine</h2>
+        <p>Enter all the details below and click on "Predict" to see the possible flight price</p>
+        <button id="random" onclick="generateRandom()">Generate data randomly</button><br><br>
+        <FORM action="{{url_for('predict')}}" method="POST">
+
+            <label for="from">Choose source city:          </label>
+            <SELECT name="from" id="from">
+                <option value="banglore">Banglore</option>
+                <option value="chennai">Chennai</option>
+                <option value="delhi">Delhi</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="mumbai">Mumbai</option>
+            </SELECT> &nbsp; &nbsp;
+            <label for="to">Choose destination city:          </label>
+            <SELECT name="to" id="to">
+                <option value="banglore">Banglore</option>
+                <option value="chennai">Chennai</option>
+                <option value="delhi">Delhi</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="mumbai">Mumbai</option>
+            </SELECT> &nbsp; &nbsp;
+
+            <label for="type">Select class: </label>
+            <SELECT name="type" id="type">
+                <option value="business">Business</option>
+                <option value="economy">Economy</option>
+            </SELECT> &nbsp; &nbsp;
+
+            <label for="date">Select travel date:</label>
+            <input type="date" id="date" name="date">
+
+            <label for="airline">Select airline: </label>
+            <SELECT name="airline" id="airline">
+                <option value="Air India">Air India</option>
+                <option value="Air Asia">Air Asia</option>
+                <option value="GO FIRST">Go First</option>
+                <option value="Indigo">Indigo</option>
+                <option value="SpiceJet">SpiceJet</option>
+                <option value="Star Air">Star Air</option>
+                <option value="Trujet">TruJet</option>
+                <option value="Vistara">Vistara</option>
+            </SELECT><br><br>
+
+            <label for="departure_phase">Select phase of departure: </label>
+            <SELECT name="departure_phase" id="departure_phase">
+                <option value="early_morning">Early morning</option>
+                <option value="morning">Morning</option>
+                <option value="afternoon">Afternoon</option>                
+                <option value="evening">Evening</option>
+                <option value="night">Night</option>
+            </SELECT> &nbsp; &nbsp;
+
+            <button type="submit" id="submit">Predict </button> 
+            
+            <p id="result">{{ prediction_result }}</p>
+        </FORM>
+
+        
+    </BODY>
+</HTML>

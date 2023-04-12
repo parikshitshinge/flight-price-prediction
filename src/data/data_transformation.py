@@ -90,8 +90,8 @@ class DataTransformation:
         This function is responsible to return column vectorizer object
         '''
         try:
-            numerical_features = ['time_taken', 'price', 'days_left']
-            categorical_features = ['airline', 'ch_code', 'from', 'stop', 'to', 'type', 'dep_time_phase', 'arr_time_phase']
+            numerical_features = ['days_left']
+            categorical_features = ['airline', 'from', 'to', 'type', 'dep_time_phase', 'arr_time_phase']
             
             cat_pipeline = Pipeline(
                 steps = [
@@ -132,11 +132,15 @@ class DataTransformation:
 
             logging.info("Applying vectorizer object on processed data")
             
-            numerical_features = ['time_taken', 'price', 'days_left']
-            categorical_features = ['airline', 'ch_code', 'from', 'stop', 'to', 'type', 'dep_time_phase', 'arr_time_phase']
+            numerical_features = ['days_left']
+            categorical_features = ['airline', 'from', 'to', 'type', 'dep_time_phase', 'arr_time_phase']
             
             preprocessed_data_vectorized = vectorizer_obj.fit_transform(preprocessed_data)
           
+            preprocessed_data_vectorized = hstack((preprocessed_data_vectorized, preprocessed_data['price'].values.reshape(-1,1) )).tocsr()
+            
+            preprocessed_data_vectorized_arr = preprocessed_data_vectorized.toarray()
+            
             logging.info("Vectorization is completed")
             
             save_object(
@@ -147,7 +151,7 @@ class DataTransformation:
             logging.info("Saved vectorizer object")
                         
             return (
-                preprocessed_data_vectorized,
+                preprocessed_data_vectorized_arr,
                 self.data_transformation_config.vectorizer_obj_file
             )
                         

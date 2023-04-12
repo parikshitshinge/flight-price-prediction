@@ -1,6 +1,10 @@
 import sys 
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent.parent))
 import pandas as pd
 from src.exception import CustomException
+from src.logger import logging
+import logging
 from src.utils import load_object
 
 class PredictPipeline:
@@ -9,22 +13,24 @@ class PredictPipeline:
     
     def predict(self, features):
         try:
-            model_path = "models\model.pkl"
-            preprocessor_path = "models\preprocessor.pkl"
+            model_path = "../models/model.pkl"
+            vectorizer_path = "../models/vectorizer.pkl"
             model = load_object(file_path=model_path)
-            preprocessor = load_object(file_path=preprocessor_path)
-            data_scaled = preprocessor.transform(features)
-            pred = model.predict(data_scaled)
+            logging.info("model.pkl is loaded")
+            vectorizer = load_object(file_path=vectorizer_path)
+            logging.info("vectorizer.pkl is loaded")
+            vectorized_data = vectorizer.transform(features)
+            logging.info("Query point is vectorized")
+            pred = model.predict(vectorized_data)
+            logging.info("Successfully predicted")
             return pred
         except Exception as e:
             raise CustomException(e, sys)
         
 class CustomData:
-    def __init__(self, airline:str, ch_code:str, from_:str, stop:str, to_:str, type_:str, dep_time_phase:str, arr_time_phase:str):
+    def __init__(self, airline:str, from_:str, to_:str, type_:str, dep_time_phase:str, arr_time_phase:str):
         self.airline = airline
-        self.ch_code = ch_code
         self.from_ = from_ 
-        self.stop = stop
         self.to_ = to_
         self.type_ = type_
         self.dep_time_phase = dep_time_phase
@@ -32,7 +38,15 @@ class CustomData:
         
     def get_data_as_data_frame(self):
         try:
-            custom_data_input_dict = {'hi':100}
+            custom_data_input_dict = {
+                            "airline" : [self.airline],
+                            "from_" : [self.from_],
+                            "to_" : [self.to_],
+                            "type_" : [self.type_], 
+                            "dep_time_phase" : [self.dep_time_phase],
+                            "arr_time_phase" : [self.arr_time_phase]
+            }
+            logging.info("Returning query point as DataFrame")
             return pd.DataFrame(custom_data_input_dict)
         
         except Exception as e:
