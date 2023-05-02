@@ -13,8 +13,8 @@ class PredictPipeline:
     
     def predict(self, features):
         try:
-            model_path = "../models/model.pkl"
-            vectorizer_path = "../models/vectorizer.pkl"
+            model_path = "./models/model.pkl"            
+            vectorizer_path = "./models/vectorizer.pkl"
             model = load_object(file_path=model_path)
             logging.info("model.pkl is loaded")
             vectorizer = load_object(file_path=vectorizer_path)

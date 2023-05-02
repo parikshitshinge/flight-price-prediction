@@ -1,0 +1,10 @@
+[ 2023-04-13 02:36:35,841 ] 224 werkzeug - WARNING -  * Debugger is active!
+[ 2023-04-13 02:36:35,847 ] 224 werkzeug - INFO -  * Debugger PIN: 121-153-717
+[ 2023-04-13 02:36:37,048 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:37] "GET /predict HTTP/1.1" 200 -
+[ 2023-04-13 02:36:40,004 ] 49 root - INFO - Returning query point as DataFrame
+[ 2023-04-13 02:36:40,025 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:40] "[35m[1mPOST /predict HTTP/1.1[0m" 500 -
+[ 2023-04-13 02:36:40,099 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:40] "[36mGET /predict?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+[ 2023-04-13 02:36:40,365 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:40] "[36mGET /predict?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+[ 2023-04-13 02:36:40,690 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:40] "[36mGET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+[ 2023-04-13 02:36:40,961 ] 224 werkzeug - INFO - 127.0.0.1 - - [13/Apr/2023 02:36:40] "[36mGET /predict?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+[ 2023-04-13 02:36:49,267 ] 224 werkzeug - INFO -  * Detected change in 'C:\\My GDrive\\05 - Tech Stuff\\Data Science\\Projects\\My Projects\\2023-04-05 - Flight Price Prediction\\src\\pipelines\\predict_pipeline.py', reloading
